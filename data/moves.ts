@@ -19920,6 +19920,25 @@ export const Moves: {[moveid: string]: MoveData} = {
 		type: "Electric",
 		contestType: "Cool",
 	},
+	thunderstormstrike: {
+		num: 1001,
+		accuracy: 90,
+		basePower: 130,
+		category: "Special",
+		name: "Thunder Storm Strike",
+		pp: 10,
+		priority: 0,
+		flags: {protect: 1, mirror: 1},
+		self: {
+			boosts: {
+				spa: -1,
+			},},
+		weather: 'RainDance',
+		secondary: null,
+		target: "normal",
+		type: "Electric",
+		contestType: "Cool",
+	},
 	thunderwave: {
 		num: 86,
 		accuracy: 90,
