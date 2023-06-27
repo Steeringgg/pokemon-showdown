@@ -19060,7 +19060,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	},
 
 
-	}	
+	
 	// NOTE: PokeStar "formes" are not actually formes and thus do not have a formeOrder
 	pokestarsmeargle: {
 		num: -5000,
@@ -19295,5 +19295,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		color: "White",
 		eggGroups: ["Undiscovered"],
 		gen: 5,
-	}
+	},
 };
+
+
