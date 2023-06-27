@@ -19045,23 +19045,22 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 
 	},
 	stormgia: {
-		num: -101
+		num: -101,
 		name: "Stormgia",
 		types: ["Electric", "Dark"],
 		baseStats: {hp: 100, atk: 100, def: 100, spa: 100, spd: 100, spe: 100},
-		abilities: {0:"Dark Aura", H: "Transistor"}
+		abilities: {0:"Dark Aura", H: "Transistor"},
 		heightm: 0.7,
 		weightkg: 24.6,
 		color: "Black",
-		eggGroups: ["Undiscovered"]
+		eggGroups: ["Undiscovered"],
 		gen: 9,
 
 
-	}.	
+	},
 
 
 	}	
-	},
 	// NOTE: PokeStar "formes" are not actually formes and thus do not have a formeOrder
 	pokestarsmeargle: {
 		num: -5000,
