@@ -3193,25 +3193,25 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			onModifyAtk(atk, source, target, move) {
 				if (this.effectState.bestStat !== 'atk') return;
 				this.debug('Protosynthesis atk boost');
-				return this.chainModify([5325, 4096]);
+				return this.chainModify(1.5);
 			},
 			onModifyDefPriority: 6,
 			onModifyDef(def, target, source, move) {
 				if (this.effectState.bestStat !== 'def') return;
 				this.debug('Protosynthesis def boost');
-				return this.chainModify([5325, 4096]);
+				return this.chainModify(1.5);
 			},
 			onModifySpAPriority: 5,
 			onModifySpA(relayVar, source, target, move) {
 				if (this.effectState.bestStat !== 'spa') return;
 				this.debug('Protosynthesis spa boost');
-				return this.chainModify([5325, 4096]);
+				return this.chainModify(1.5);
 			},
 			onModifySpDPriority: 6,
 			onModifySpD(relayVar, target, source, move) {
 				if (this.effectState.bestStat !== 'spd') return;
 				this.debug('Protosynthesis spd boost');
-				return this.chainModify([5325, 4096]);
+				return this.chainModify(1.5);
 			},
 			onModifySpe(spe, pokemon) {
 				if (this.effectState.bestStat !== 'spe') return;
@@ -3327,25 +3327,25 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 			onModifyAtk(atk, source, target, move) {
 				if (this.effectState.bestStat !== 'atk') return;
 				this.debug('Quark Drive atk boost');
-				return this.chainModify([5325, 4096]);
+				return this.chainModify(1.5);
 			},
 			onModifyDefPriority: 6,
 			onModifyDef(def, target, source, move) {
 				if (this.effectState.bestStat !== 'def') return;
 				this.debug('Quark Drive def boost');
-				return this.chainModify([5325, 4096]);
+				return this.chainModify(1.5);
 			},
 			onModifySpAPriority: 5,
 			onModifySpA(relayVar, source, target, move) {
 				if (this.effectState.bestStat !== 'spa') return;
 				this.debug('Quark Drive spa boost');
-				return this.chainModify([5325, 4096]);
+				return this.chainModify(1.5);
 			},
 			onModifySpDPriority: 6,
 			onModifySpD(relayVar, target, source, move) {
 				if (this.effectState.bestStat !== 'spd') return;
 				this.debug('Quark Drive spd boost');
-				return this.chainModify([5325, 4096]);
+				return this.chainModify(1.5);
 			},
 			onModifySpe(spe, pokemon) {
 				if (this.effectState.bestStat !== 'spe') return;
