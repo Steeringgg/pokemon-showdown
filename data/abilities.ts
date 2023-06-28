@@ -311,8 +311,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 123,
 	},
 	ballfetch: {
+		onBasePowerPriority: 19,
+		onBasePower(basePower, attacker, defender, move) {
+			if (move.flags['bullet']) {
+				return this.chainModify(1.5);
+			}
+		},
 		name: "Ball Fetch",
-		rating: 0,
+		rating: 3,
 		num: 237,
 	},
 	battery: {
@@ -723,9 +729,9 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	curiousmedicine: {
 		onStart(pokemon) {
-			for (const ally of pokemon.adjacentAllies()) {
-				ally.clearBoosts();
-				this.add('-clearboost', ally, '[from] ability: Curious Medicine', '[of] ' + pokemon);
+			for (const target of this.getAllActive()) {
+				target.clearBoosts();
+				this.add('-clearboost', target, '[from] ability: Curious Medicine', '[of] ' + pokemon);
 			}
 		},
 		name: "Curious Medicine",
@@ -1411,8 +1417,8 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 169,
 	},
 	galewings: {
-		onModifyPriority(priority, pokemon, target, move) {
-			if (move?.type === 'Flying' && pokemon.hp === pokemon.maxhp) return priority + 1;
+		onModifyPriority(priority, attacker, defender, move) {
+			if (move?.type === 'Flying' && attacker.maxhp / 2 <= attacker.hp) return priority + 1;
 		},
 		name: "Gale Wings",
 		rating: 2.5,
@@ -1676,7 +1682,21 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 	},
 	honeygather: {
 		name: "Honey Gather",
-		rating: 0,
+		onModifyAtkPriority: 5,
+		onModifyAtk(atk, attacker, defender, move) {
+			if (move.type === 'Bug') {
+				this.debug('Honey Gather boost');
+				return this.chainModify(1.5);
+			}
+		},
+		onModifySpAPriority: 5,
+		onModifySpA(atk, attacker, defender, move) {
+			if (move.type === 'Bug') {
+				this.debug('Honey Gather boost');
+				return this.chainModify(1.5);
+			}
+		},
+		rating: 3.5,
 		num: 118,
 	},
 	hugepower: {
@@ -1828,8 +1848,14 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 246,
 	},
 	illuminate: {
+		onSourceModifyAccuracyPriority: -1,
+		onSourceModifyAccuracy(accuracy) {
+			if (typeof accuracy !== 'number') return;
+			this.debug('compoundeyes - enhancing accuracy');
+			return this.chainModify([5325, 4096]);
+		},
 		name: "Illuminate",
-		rating: 0,
+		rating: 3,
 		num: 35,
 	},
 	illusion: {
@@ -4384,22 +4410,69 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 33,
 	},
 	symbiosis: {
-		onAllyAfterUseItem(item, pokemon) {
-			if (pokemon.switchFlag) return;
-			const source = this.effectState.target;
-			const myItem = source.takeItem();
-			if (!myItem) return;
-			if (
-				!this.singleEvent('TakeItem', myItem, source.itemState, pokemon, source, this.effect, myItem) ||
-				!pokemon.setItem(myItem)
-			) {
-				source.item = myItem.id;
-				return;
-			}
-			this.add('-activate', source, 'ability: Symbiosis', myItem, '[of] ' + pokemon);
+		onStart(pokemon) {
+			this.singleEvent('TerrainChange', this.effect, this.effectState, pokemon);
 		},
+		onTerrainChange(pokemon) {
+			if (pokemon.transformed) return;
+			if (this.field.isTerrain('grassyterrain')) {
+				pokemon.addVolatile('symbiosis');
+			} else if (!pokemon.volatiles['symbiosis']?.fromBooster) {
+				pokemon.removeVolatile('symbiosis');
+			}
+		},
+		onEnd(pokemon) {
+			delete pokemon.volatiles['symbiosis'];
+			this.add('-end', pokemon, 'Symbiosis', '[silent]');
+		},
+		condition: {
+			noCopy: true,
+			onStart(pokemon, source, effect) {
+				if (effect?.id === 'boosterenergy') {
+					this.effectState.fromBooster = true;
+					this.add('-activate', pokemon, 'ability: Symbiosis', '[fromitem]');
+				} else {
+					this.add('-activate', pokemon, 'ability: Symbiosis');
+				}
+				this.effectState.bestStat = pokemon.getBestStat(false, true);
+				this.add('-start', pokemon, 'symbiosis' + this.effectState.bestStat);
+			},
+			onModifyAtkPriority: 5,
+			onModifyAtk(atk, source, target, move) {
+				if (this.effectState.bestStat !== 'atk') return;
+				this.debug('Symbiosis atk boost');
+				return this.chainModify(1.5);
+			},
+			onModifyDefPriority: 6,
+			onModifyDef(def, target, source, move) {
+				if (this.effectState.bestStat !== 'def') return;
+				this.debug('Symbiosis def boost');
+				return this.chainModify(1.5);
+			},
+			onModifySpAPriority: 5,
+			onModifySpA(relayVar, source, target, move) {
+				if (this.effectState.bestStat !== 'spa') return;
+				this.debug('Symbiosis spa boost');
+				return this.chainModify(1.5);
+			},
+			onModifySpDPriority: 6,
+			onModifySpD(relayVar, target, source, move) {
+				if (this.effectState.bestStat !== 'spd') return;
+				this.debug('Symbiosis spd boost');
+				return this.chainModify(1.5);
+			},
+			onModifySpe(spe, pokemon) {
+				if (this.effectState.bestStat !== 'spe') return;
+				this.debug('Symbiosis spe boost');
+				return this.chainModify(1.5);
+			},
+			onEnd(pokemon) {
+				this.add('-end', pokemon, 'Symbiosis');
+			},
+		},
+		isPermanent: true,
 		name: "Symbiosis",
-		rating: 0,
+		rating: 3,
 		num: 180,
 	},
 	synchronize: {
@@ -4490,15 +4563,69 @@ export const Abilities: {[abilityid: string]: AbilityData} = {
 		num: 101,
 	},
 	telepathy: {
-		onTryHit(target, source, move) {
-			if (target !== source && target.isAlly(source) && move.category !== 'Status') {
-				this.add('-activate', target, 'ability: Telepathy');
-				return null;
+		onStart(pokemon) {
+			this.singleEvent('TerrainChange', this.effect, this.effectState, pokemon);
+		},
+		onTerrainChange(pokemon) {
+			if (pokemon.transformed) return;
+			if (this.field.isTerrain('psychicterrain')) {
+				pokemon.addVolatile('telepathy');
+			} else if (!pokemon.volatiles['telepathy']?.fromBooster) {
+				pokemon.removeVolatile('telepathy');
 			}
 		},
-		isBreakable: true,
+		onEnd(pokemon) {
+			delete pokemon.volatiles['telepathy'];
+			this.add('-end', pokemon, 'telepathy', '[silent]');
+		},
+		condition: {
+			noCopy: true,
+			onStart(pokemon, source, effect) {
+				if (effect?.id === 'boosterenergy') {
+					this.effectState.fromBooster = true;
+					this.add('-activate', pokemon, 'ability: Telepathy', '[fromitem]');
+				} else {
+					this.add('-activate', pokemon, 'ability: Telepathy');
+				}
+				this.effectState.bestStat = pokemon.getBestStat(false, true);
+				this.add('-start', pokemon, 'telepathy' + this.effectState.bestStat);
+			},
+			onModifyAtkPriority: 5,
+			onModifyAtk(atk, source, target, move) {
+				if (this.effectState.bestStat !== 'atk') return;
+				this.debug('Telepathy atk boost');
+				return this.chainModify(1.5);
+			},
+			onModifyDefPriority: 6,
+			onModifyDef(def, target, source, move) {
+				if (this.effectState.bestStat !== 'def') return;
+				this.debug('Telepathy def boost');
+				return this.chainModify(1.5);
+			},
+			onModifySpAPriority: 5,
+			onModifySpA(relayVar, source, target, move) {
+				if (this.effectState.bestStat !== 'spa') return;
+				this.debug('Telepathy spa boost');
+				return this.chainModify(1.5);
+			},
+			onModifySpDPriority: 6,
+			onModifySpD(relayVar, target, source, move) {
+				if (this.effectState.bestStat !== 'spd') return;
+				this.debug('Telepathy spd boost');
+				return this.chainModify(1.5);
+			},
+			onModifySpe(spe, pokemon) {
+				if (this.effectState.bestStat !== 'spe') return;
+				this.debug('Telepathy spe boost');
+				return this.chainModify(1.5);
+			},
+			onEnd(pokemon) {
+				this.add('-end', pokemon, 'Telepathy');
+			},
+		},
+		isPermanent: true,
 		name: "Telepathy",
-		rating: 0,
+		rating: 3,
 		num: 140,
 	},
 	teravolt: {

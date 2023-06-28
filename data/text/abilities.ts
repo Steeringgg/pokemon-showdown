@@ -136,7 +136,8 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	},
 	ballfetch: {
 		name: "Ball Fetch",
-		shortDesc: "No competitive use.",
+		desc: "This Pokemon's bullet based moves have their power multiplied by 1.5.",
+		shortDesc: "This Pokemon's bullet moves have 1.5x power.",
 	},
 	battery: {
 		name: "Battery",
@@ -281,7 +282,7 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	},
 	curiousmedicine: {
 		name: "Curious Medicine",
-		shortDesc: "On switch-in, this Pokemon's allies have their stat stages reset to 0.",
+		shortDesc: "On switch-in, this Pokemon sets all stat stages to 0.",
 	},
 	cursedbody: {
 		name: "Cursed Body",
@@ -547,7 +548,7 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	},
 	galewings: {
 		name: "Gale Wings",
-		shortDesc: "If this Pokemon is at full HP, its Flying-type moves have their priority increased by 1.",
+		shortDesc: "If this Pokemon is at 1/2 or more HP, its Flying-type moves have their priority increased by 1.",
 		gen6: {
 			shortDesc: "This Pokemon's Flying-type moves have their priority increased by 1.",
 		},
@@ -638,7 +639,7 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	},
 	honeygather: {
 		name: "Honey Gather",
-		shortDesc: "No competitive use.",
+		shortDesc: "This Pokemon's offensive stat is multiplied by 1.5 while using a Bug-type attack.",
 	},
 	hugepower: {
 		name: "Huge Power",
@@ -690,7 +691,7 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	},
 	illuminate: {
 		name: "Illuminate",
-		shortDesc: "No competitive use.",
+		shortDesc: "This Pokemon's moves have their accuracy multiplied by 1.3.",
 	},
 	illusion: {
 		name: "Illusion",
@@ -1304,8 +1305,8 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	},
 	protosynthesis: {
 		name: "Protosynthesis",
-		desc: "If Sunny Day is active or this Pokemon uses a held Booster Energy, this Pokemon's highest stat is multiplied by 1.3, or by 1.5 if the highest stat is Speed. Stat stage changes are considered at the time this Ability activates. If multiple stats are tied, Attack, Defense, Special Attack, Special Defense, and Speed are prioritized in that order. If this effect was started by Sunny Day, a held Booster Energy will not activate and the effect ends when Sunny Day is no longer active. If this effect was started by a held Booster Energy, it ends when this Pokemon is no longer active.",
-		shortDesc: "Sunny Day active or Booster Energy used: highest stat is 1.3x, or 1.5x if Speed.",
+		desc: "If Sunny Day is active or this Pokemon uses a held Booster Energy, this Pokemon's highest stat is multiplied by 1.5. Stat stage changes are considered at the time this Ability activates. If multiple stats are tied, Attack, Defense, Special Attack, Special Defense, and Speed are prioritized in that order. If this effect was started by Sunny Day, a held Booster Energy will not activate and the effect ends when Sunny Day is no longer active. If this effect was started by a held Booster Energy, it ends when this Pokemon is no longer active.",
+		shortDesc: "Sunny Day active or Booster Energy used: highest stat is 1.5x.",
 
 		activate: "  The harsh sunlight activated [POKEMON]'s Protosynthesis!",
 		activateFromItem: "  [POKEMON] used its Booster Energy to activate Protosynthesis!",
@@ -1332,8 +1333,8 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	},
 	quarkdrive: {
 		name: "Quark Drive",
-		desc: "If Electric Terrain is active or this Pokemon uses a held Booster Energy, this Pokemon's highest stat is multiplied by 1.3, or by 1.5 if the highest stat is Speed. Stat stage changes are considered at the time this Ability activates. If multiple stats are tied, Attack, Defense, Special Attack, Special Defense, and Speed are prioritized in that order. If this effect was started by Electric Terrain, a held Booster Energy will not activate and the effect ends when Electric Terrain is no longer active. If this effect was started by a held Booster Energy, it ends when this Pokemon is no longer active.",
-		shortDesc: "Electric Terrain active or Booster Energy used: highest stat is 1.3x, or 1.5x if Speed.",
+		desc: "If Electric Terrain is active or this Pokemon uses a held Booster Energy, this Pokemon's highest stat is multiplied by 1.5. Stat stage changes are considered at the time this Ability activates. If multiple stats are tied, Attack, Defense, Special Attack, Special Defense, and Speed are prioritized in that order. If this effect was started by Electric Terrain, a held Booster Energy will not activate and the effect ends when Electric Terrain is no longer active. If this effect was started by a held Booster Energy, it ends when this Pokemon is no longer active.",
+		shortDesc: "Electric Terrain active or Booster Energy used: highest stat is 1.5x.",
 
 		activate: "  The Electric Terrain activated [POKEMON]'s Quark Drive!",
 		activateFromItem: "  [POKEMON] used its Booster Energy to activate its Quark Drive!",
@@ -1835,16 +1836,13 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	},
 	symbiosis: {
 		name: "Symbiosis",
-		desc: "If an ally uses its item, this Pokemon gives its item to that ally immediately. Does not activate if the ally's item was stolen or knocked off, or if the ally used an Eject Button or Eject Pack.",
-		shortDesc: "If an ally uses its item, this Pokemon gives its item to that ally immediately.",
-		gen7: {
-			desc: "If an ally uses its item, this Pokemon gives its item to that ally immediately. Does not activate if the ally's item was stolen or knocked off, or if the ally used an Eject Button.",
-		},
-		gen6: {
-			desc: "If an ally uses its item, this Pokemon gives its item to that ally immediately. Does not activate if the ally's item was stolen or knocked off.",
-		},
+		desc: "If Grassy Terrain is active or this Pokemon uses a held Booster Energy, this Pokemon's highest stat is multiplied by 1.5. Stat stage changes are considered at the time this Ability activates. If multiple stats are tied, Attack, Defense, Special Attack, Special Defense, and Speed are prioritized in that order. If this effect was started by Grassy Terrain, a held Booster Energy will not activate and the effect ends when Grassy Terrain is no longer active. If this effect was started by a held Booster Energy, it ends when this Pokemon is no longer active.",
+		shortDesc: "Grassy Terrain active or Booster Energy used: highest stat is 1.5x.",
 
-		activate: "  [POKEMON] shared its [ITEM] with [TARGET]!",
+		activate: "  The Grassy Terrain activated [POKEMON]'s Symbiosis!",
+		activateFromItem: "  [POKEMON] used its Booster Energy to activate its Symbiosis!",
+		start: "  [POKEMON]'s [STAT] was heightened!",
+		end: "  The effects of [POKEMON]'s Symbiosis wore off!",
 	},
 	synchronize: {
 		name: "Synchronize",
@@ -1879,9 +1877,13 @@ export const AbilitiesText: {[k: string]: AbilityText} = {
 	},
 	telepathy: {
 		name: "Telepathy",
-		shortDesc: "This Pokemon does not take damage from attacks made by its allies.",
+		desc: "If Psychic Terrain is active or this Pokemon uses a held Booster Energy, this Pokemon's highest stat is multiplied by 1.5. Stat stage changes are considered at the time this Ability activates. If multiple stats are tied, Attack, Defense, Special Attack, Special Defense, and Speed are prioritized in that order. If this effect was started by Psychic Terrain, a held Booster Energy will not activate and the effect ends when Psychic Terrain is no longer active. If this effect was started by a held Booster Energy, it ends when this Pokemon is no longer active.",
+		shortDesc: "Psychic Terrain active or Booster Energy used: highest stat is 1.5x.",
 
-		block: "  [POKEMON] can't be hit by attacks from its ally Pok\u00E9mon!",
+		activate: "  The Grassy Terrain activated [POKEMON]'s Telepathy!",
+		activateFromItem: "  [POKEMON] used its Booster Energy to activate its Telepathy!",
+		start: "  [POKEMON]'s [STAT] was heightened!",
+		end: "  The effects of [POKEMON]'s Telepathy wore off!",
 	},
 	teravolt: {
 		name: "Teravolt",
