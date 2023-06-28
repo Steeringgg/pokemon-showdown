@@ -3329,6 +3329,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Has a 30% chance to make the target flinch.",
 		shortDesc: "30% chance to make the target flinch.",
 	},
+	ironrush: {
+		name: "Iron Rush",
+		desc: "If the target lost HP, the user takes recoil damage equal to 33% the HP lost by the target, rounded half up, but not less than 1 HP.",
+		shortDesc: "Has 33% recoil.",
+	},
 	irontail: {
 		name: "Iron Tail",
 		desc: "Has a 30% chance to lower the target's Defense by 1 stage.",
