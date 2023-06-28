@@ -17061,7 +17061,7 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 	bellibolt: {
 		num: 939,
 		name: "Bellibolt",
-		types: ["Electric"],
+		types: ["Electric", "Water"],
 		baseStats: {hp: 119, atk: 64, def: 91, spa: 103, spd: 83, spe: 45},
 		abilities: {0: "Electromorphosis", 1: "Static", H: "Damp"},
 		heightm: 1.2,
@@ -19054,6 +19054,20 @@ export const Pokedex: {[speciesid: string]: SpeciesData} = {
 		weightkg: 24.6,
 		color: "Black",
 		eggGroups: ["Undiscovered"],
+		gen: 9,
+
+
+	},
+	hematice: {
+		num:-102,
+		name: "Hematice",
+		types: ["Rock", "Ice"],
+		baseStats: {hp: 40, atk: 49, def: 95, spa: 132, spd: 106, spe: 128},
+		abilities: {0:"Dazzling", 1:"Weak Armor", H: "Illuminate"},
+		heightm: 1.5,
+		weightkg: 64.5,
+		color: "Black",
+		eggGroups: ["Mineral"],
 		gen: 9,
 
 
