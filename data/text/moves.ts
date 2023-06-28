@@ -6834,6 +6834,11 @@ export const MovesText: {[k: string]: MoveText} = {
 		desc: "Has a 10% chance to paralyze the target.",
 		shortDesc: "10% chance to paralyze the target.",
 	},
+	thunderstormstrike: {
+		name: "Thunder Storm Strike",
+		desc: "Lowers the user's Special Attack by 1 stage. Sets Rain when move is successful.",
+		shortDesc: "Lowers the user's Special Attack by 1. Sets Rain",
+	},
 	thunderwave: {
 		name: "Thunder Wave",
 		desc: "Paralyzes the target. This move does not ignore type immunity.",
